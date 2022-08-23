@@ -2,7 +2,8 @@
     "name": "selveo/magento2",
     "description": "N/A",
     "type": "magento2-module",
-    "version": "0.0.2",
+    "version": "0.0.3",
+    "license" :"GNU AFFERO GENERAL PUBLIC LICENSE",
     "keywords": [
         "magento 2",
         "selveo module for magento 2"
