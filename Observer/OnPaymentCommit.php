@@ -25,9 +25,9 @@ class OnPaymentCommit implements ObserverInterface
 		/** @var Payment */
 		$payment = $observer->getEvent()->getPayment();
 
-		$this->logger->critical('place order - only when has last_trans_id!', [$payment->getData()]);
+		$this->logger->debug('place order - only when has last_trans_id', [$payment->getData()]);
 		
-		$this->notifier->notifyPlacedOrUpdated(
+		$this->notifier->notiyOrderSaved(
 			$observer->getEvent()->getPayment()->getOrder()
 		);
 	}

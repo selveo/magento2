@@ -9,5 +9,5 @@ interface NotifierInterface
 {
 	public function notifySaved(AbstractModel $model);
 
-	public function notifyPlacedOrUpdated(OrderInterface $order);
+	public function notiyOrderSaved(OrderInterface $order);
 }

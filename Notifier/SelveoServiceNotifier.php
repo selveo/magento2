@@ -2,35 +2,49 @@
 
 namespace Selveo\MagentoTwoIntegration\Notifier;
 
+use InvalidArgumentException;
 use Magento\Catalog\Model\AbstractModel;
-use Magento\Catalog\Model\Product;
 use Magento\Sales\Api\Data\OrderInterface;
 use Psr\Log\LoggerInterface;
-use Selveo\MagentoTwoIntegration\ClientInterface;
 use Selveo\MagentoTwoIntegration\NotifierInterface;
+use Selveo\MagentoTwoIntegration\Webhook\ClientInterface;
+use Selveo\MagentoTwoIntegration\Webhook\PayloadBuilder;
 
 class SelveoServiceNotifier implements NotifierInterface
 {
 	protected $logger;
-	protected $client;
+	protected $webhook;
 
-	public function __construct(LoggerInterface $logger, ClientInterface $client)
+	public function __construct(LoggerInterface $logger, ClientInterface $webhook)
 	{
 		$this->logger = $logger;
-		$this->client = $client;
+		$this->webhook = $webhook;
+	}
+
+	public function notiyOrderSaved(OrderInterface $order)
+	{
+		$this->notifyModelEvent("saved", $order);
 	}
 
 	public function notifySaved(AbstractModel $model)
 	{
-		switch (true) {
-			case $model instanceof Product:
-				$this->client->notifyProductSaved($model);
-				break;
-		}
+		$this->notifyModelEvent("saved", $model);
 	}
 
-	public function notifyPlacedOrUpdated(OrderInterface $order)
+	protected function notifyModelEvent(string $event, $model)
 	{
-		$this->client->notifyOrderPlacedOrUpdated($order);
+		try {
+			$this->webhook->send(
+				PayloadBuilder::withEvent($event)
+					->withModel($model)
+					->build()
+			);
+		} catch (InvalidArgumentException $e) {
+			$this->logger->warning("unable to notify about saved model", [
+				'exception' => $e
+			]);
+			return;
+		}
+		
 	}
 }

@@ -9,7 +9,7 @@ use Selveo\MagentoTwoIntegration\NotifierInterface;
 
 class OnAdminOrderAddressUpdate implements ObserverInterface
 {
-	protected $notifier;
+	protected NotifierInterface $notifier;
 	protected $orderRepository;
 
 	public function __construct(NotifierInterface $notifier, OrderRepositoryInterface $orderRepository)
@@ -26,6 +26,6 @@ class OnAdminOrderAddressUpdate implements ObserverInterface
 		$orderId = $observer->getEvent()->getOrderId();
 		$order = $this->orderRepository->get($orderId);	
 
-		$this->notifier->notifyPlacedOrUpdated($order);
+		$this->notifier->notiyOrderSaved($order);
 	}
 }

@@ -2,7 +2,7 @@
     "name": "selveo/magento2",
     "description": "N/A",
     "type": "magento2-module",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "license" :"GNU AGPLv3",
     "keywords": [
         "magento 2",
@@ -28,7 +28,8 @@
     "require": {
         "magento/framework": "^103.0",
         "magento/module-catalog": "^104.0",
-        "guzzlehttp/guzzle": "~6.0|~7.0"
+        "guzzlehttp/guzzle": "~6.0|~7.0",
+        "php": ">=7.4"
     },
     "config": {
         "allow-plugins": {
