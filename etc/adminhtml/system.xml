@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="selveo_tab" translate="label" sortOrder="1000">
+			<label>Selveo</label>
+		</tab>
+
+		<section id="selveo_integration" showInDefault="1" showInWebsite="0" showInStore="0" translate="label" sortOrder="1">
+			<label>Integration</label>
+			<tab>selveo_tab</tab>
+			<resource>Selveo_MagentoTwoIntegration::webhook</resource>
+			
+			<group id="integration" translate="label" showInDefault="1" showInWebsite="0" showInStore="0" sortOrder="1">
+				<label>Integration options</label>
+
+				<field id="active_integration" type="select" translate="label comment" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>Active integration</label>
+					<comment>The integration used to communicate with the Selveo webhook. Shows active integrations.</comment>
+					<validate>required-entry</validate>
+					<source_model>Selveo\MagentoTwoIntegration\Model\Config\Source\Active\Integration</source_model>
+				</field>
+			</group>
+		</section>
+    </system>
+</config>

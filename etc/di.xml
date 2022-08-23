@@ -1,0 +1,11 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Selveo\MagentoTwoIntegration\NotifierInterface" type="Selveo\MagentoTwoIntegration\Notifier\SelveoServiceNotifier" />
+    <preference for="Selveo\MagentoTwoIntegration\ClientInterface" type="Selveo\MagentoTwoIntegration\Client\Guzzle" />
+    <preference for="Selveo\MagentoTwoIntegration\Api\IntegrationInterface" type="Selveo\MagentoTwoIntegration\Model\IntegrationService" />
+    <preference for="Selveo\MagentoTwoIntegration\SignerInterface" type="Selveo\MagentoTwoIntegration\Model\HmacSigner" />
+    <type name="Selveo\MagentoTwoIntegration\SelveoServiceNotifier">
+        <arguments>
+            <argument name="selveoServiceClient" xsi:type="object">Selveo\MagentoTwoIntegration\ClientInterface</argument>
+        </arguments>
+    </type>
+</config>
